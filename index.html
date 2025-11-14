@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Goals Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>Study Goals Tracker</h1>
+                <p class="subtitle">Achieve your academic dreams, one goal at a time</p>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="goals" >
+                
+                Goals
+            </button>
+            <button class="nav-tab" data-tab="achievements">
+                
+                Achievements
+            </button>
+            <button class="nav-tab" data-tab="pomodoro">
+                
+                Pomodoro
+            </button>
+            <button class="nav-tab" data-tab="feedback">
+                
+                Feedback
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Goals Section -->
+            <section id="goals" class="tab-content active">
+                <div class="section-header">
+                    <h2>Set Your Study Goals</h2>
+                    <button class="btn btn-primary" id="add-goal-btn">
+                        
+                        Add New Goal
+                    </button>
+                </div>
+
+                <!-- Goal Form Modal -->
+                <div id="goal-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Create New Goal</h3>
+                            <span class="close">&times;</span>
+                        </div>
+                        <form id="goal-form">
+                            <div class="form-group">
+                                <label for="goal-title">Goal Title</label>
+                                <input type="text" id="goal-title" required placeholder="e.g., Mathematics">
+                            </div>
+                            <div class="form-group">
+                                <label for="goal-description">Description</label>
+                                <textarea id="goal-description" rows="3" placeholder="e.g., complete calculus..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="goal-category">Category</label>
+                                <select id="goal-category" required>
+                                    <option value="">Select Category</option>
+                                    <option value="academic">Academic</option>
+                                    <option value="skill">Skill Development</option>
+                                    <option value="exam">Exam Preparation</option>
+                                    <option value="research">Research</option>
+                                    <option value="project">Project</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="goal-deadline">Target Date</label>
+                                <input type="date" id="goal-deadline" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="goal-priority">Priority</label>
+                                <select id="goal-priority" required>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancel-goal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Create Goal</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Goals List -->
+                <div class="goals-grid" id="goals-list">
+                    <!-- Goals will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Achievements Section -->
+            <section id="achievements" class="tab-content">
+                <div class="section-header">
+                    <h2>Log Your Achievements</h2>
+                    <button class="btn btn-primary" id="add-achievement-btn">
+                        <i class="fas fa-plus"></i>
+                        Log Achievement
+                    </button>
+                </div>
+
+                <!-- Achievement Form Modal -->
+                <div id="achievement-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>Log Achievement</h3>
+                            <span class="close">&times;</span>
+                        </div>
+                        <form id="achievement-form">
+                            <div class="form-group">
+                                <label for="achievement-title">Achievement Title</label>
+                                <input type="text" id="achievement-title" required placeholder="e.g., Completed Chapter 5">
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement-description">Description</label>
+                                <textarea id="achievement-description" rows="3" placeholder="Describe your achievement..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement-goal">Related Goal</label>
+                                <select id="achievement-goal">
+                                    <option value="">Select Goal (Optional)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement-date">Date Achieved</label>
+                                <input type="date" id="achievement-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="achievement-effort">Effort Level</label>
+                                <select id="achievement-effort" required>
+                                    <option value="easy">Easy</option>
+                                    <option value="moderate">Moderate</option>
+                                    <option value="challenging">Challenging</option>
+                                    <option value="difficult">Difficult</option>
+                                </select>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancel-achievement">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Log Achievement</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Achievements List -->
+                <div class="achievements-list" id="achievements-list">
+                    <!-- Achievements will be dynamically added here -->
+                </div>
+            </section>
+
+            <!-- Pomodoro Timer Section -->
+            <section id="pomodoro" class="tab-content">
+                <div class="section-header">
+                    <h2>Pomodoro Timer</h2>
+                    <div class="timer-controls">
+                        <button class="btn btn-primary" id="start-timer-btn">
+                            <i class="fas fa-play"></i>
+                            Start
+                        </button>
+                        <button class="btn btn-secondary" id="pause-timer-btn" disabled>
+                            <i class="fas fa-pause"></i>
+                            Pause
+                        </button>
+                        <button class="btn btn-danger" id="reset-timer-btn">
+                            <i class="fas fa-redo"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Timer Display -->
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <div class="timer-progress" id="timer-progress">
+                            <div class="timer-time" id="timer-display">25:00</div>
+                            <div class="timer-mode" id="timer-mode">Focus Time</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timer Settings -->
+                <div class="timer-settings">
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <label for="work-duration">Work Duration (minutes)</label>
+                            <input type="number" id="work-duration" value="25" min="1" max="60">
+                        </div>
+                        <div class="setting-group">
+                            <label for="break-duration">Break Duration (minutes)</label>
+                            <input type="number" id="break-duration" value="5" min="1" max="30">
+                        </div>
+                        <div class="setting-group">
+                            <label for="long-break-duration">Long Break Duration (minutes)</label>
+                            <input type="number" id="long-break-duration" value="15" min="1" max="60">
+                        </div>
+                        <div class="setting-group">
+                            <label for="sessions-before-long-break">Sessions Before Long Break</label>
+                            <input type="number" id="sessions-before-long-break" value="4" min="2" max="10">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session Statistics -->
+                <div class="session-stats">
+                    <h3>Today's Sessions</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number" id="completed-sessions">0</div>
+                            <div class="stat-label">Completed Sessions</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="total-focus-time">0</div>
+                            <div class="stat-label">Total Focus Time (min)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="current-streak">0</div>
+                            <div class="stat-label">Current Streak</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session History -->
+                <div class="session-history">
+                    <h3>Recent Sessions</h3>
+                    <div class="history-list" id="session-history">
+                        <div class="empty-state">
+                            <i class="fas fa-history"></i>
+                            <h3>No Sessions Yet</h3>
+                            <p>Start your first Pomodoro session to see your history!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Section -->
+            <section id="feedback" class="tab-content">
+                <div class="section-header">
+                    <h2>Motivation & Reflection</h2>
+                    <button class="btn btn-primary" id="generate-feedback-btn">
+                        <i class="fas fa-magic"></i>
+                        Get Feedback
+                    </button>
+                </div>
+
+                <!-- Feedback Display -->
+                <div class="feedback-container">
+                    <div class="feedback-card" id="motivation-card">
+                        <div class="feedback-header">
+                            <i class="fas fa-heart"></i>
+                            <h3>Daily Motivation</h3>
+                        </div>
+                        <div class="feedback-content" id="motivation-content">
+                            <p>Click "Get Feedback" to receive personalized motivation based on your progress!</p>
+                        </div>
+                    </div>
+
+                    <div class="feedback-card" id="reflection-card">
+                        <div class="feedback-header">
+                            <i class="fas fa-mirror"></i>
+                            <h3>Reflection Prompts</h3>
+                        </div>
+                        <div class="feedback-content" id="reflection-content">
+                            <p>Get thoughtful questions to help you reflect on your learning journey.</p>
+                        </div>
+                    </div>
+
+                    <div class="feedback-card" id="progress-card">
+                        <div class="feedback-header">
+                            <i class="fas fa-chart-line"></i>
+                            <h3>Progress Insights</h3>
+                        </div>
+                        <div class="feedback-content" id="progress-content">
+                            <p>View insights about your study patterns and achievements.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
